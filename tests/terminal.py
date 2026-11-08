@@ -119,7 +119,7 @@ def pane(prompt=r"PS1$ ", *, source=True, width=100, height=30, x=0, y=7, mode="
             environment = "TMUX_PANE=%999999\n"
         hooks = "PROMPT_COMMAND=([2]='printf \"HOOK_RAN\\n\"; true' [9]=" + shlex.quote(f'printf "\\033[{y + 1};{x + 1}H"; false') + ")\n"
         rc.write_text(
-            "PS1=" + shlex.quote(prompt) + "\n"
+            "HISTFILE=/dev/null\nPS1=" + shlex.quote(prompt) + "\n"
             'printf "\\033[2J\\033[HKEEP_BEFORE\\n"\n'
             + environment + hooks + setup + "\n"
             + ("source " + shlex.quote(str(HOOK)) + "\n" if source else "")
