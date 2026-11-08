@@ -32,6 +32,7 @@ trap 'rm -f "$temporary"' EXIT HUP INT TERM
 awk '
     $0 == "# Shimmer prompt animation" { next }
     $0 == "[[ -r ~/.config/shell/glimmer.bash ]] && source ~/.config/shell/glimmer.bash" { next }
+    $0 == "[[ -r \"$HOME/.config/shell/glimmer.bash\" ]] && source \"$HOME/.config/shell/glimmer.bash\"" { next }
     { print }
 ' "$bashrc" > "$temporary"
 printf '%s\n%s\n' '# Shimmer prompt animation' \

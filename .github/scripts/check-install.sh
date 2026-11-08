@@ -14,6 +14,7 @@ mkdir -p "$fixture/home/.config/shell" "$fixture/bundle"
 printf '%s\n' 'effect=assemble' > "$fixture/home/.config/shell/glimmer.conf"
 printf '%s\n' 'PS1="fixture> "' 'PROMPT_COMMAND=:' \
     '[[ -r ~/.config/shell/glimmer.bash ]] && source ~/.config/shell/glimmer.bash' \
+    '[[ -r "$HOME/.config/shell/glimmer.bash" ]] && source "$HOME/.config/shell/glimmer.bash"' \
     'PROMPT_COMMAND="echo after-existing-source"' > "$fixture/home/.bashrc"
 HOME=$fixture/home SHIMMER_BIN=$binary sh "$root/scripts/install.sh"
 cp "$fixture/home/.bashrc" "$fixture/bashrc-first-install"
@@ -21,6 +22,11 @@ HOME=$fixture/home SHIMMER_BIN=$binary sh "$root/scripts/install.sh"
 cmp "$fixture/bashrc-first-install" "$fixture/home/.bashrc"
 [ "$(cat "$fixture/home/.config/shell/glimmer.conf")" = 'effect=assemble' ]
 [ "$(grep -c '^\[\[ -r ~/.config/shell/glimmer.bash' "$fixture/home/.bashrc")" -eq 1 ]
+hook_count=$(grep -c 'source .*glimmer.bash' "$fixture/home/.bashrc")
+if [ "$hook_count" -ne 1 ]; then
+    printf 'Expected one Shimmer source line, found %s\n' "$hook_count" >&2
+    exit 1
+fi
 [ "$(tail -n 1 "$fixture/home/.bashrc")" = '[[ -r ~/.config/shell/glimmer.bash ]] && source ~/.config/shell/glimmer.bash' ]
 grep -q '^PROMPT_COMMAND="echo after-existing-source"$' "$fixture/home/.bashrc"
 "$fixture/home/.local/bin/shimmer" --version
