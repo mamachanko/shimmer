@@ -4,6 +4,18 @@ Shimmer plays a short animation before an interactive Bash prompt. Choose a cyan
 
 Shimmer needs Bash 5.1 or newer and an ANSI terminal with an alternate screen. It runs on Linux and macOS, inside or outside tmux. macOS ships Bash 3.2, so install a current Bash and use it as your interactive shell first. Installed releases need neither Rust nor Python.
 
+## Watch the effects
+
+Assemble moves colored fragments into the position of your Bash prompt.
+
+![Assemble recorded in a real Bash terminal](docs/demos/assemble.gif)
+
+Shimmer sweeps cyan, white, and lime across the terminal, then restores your shell.
+
+![Shimmer recorded in a real Bash terminal](docs/demos/shimmer.gif)
+
+Open the [assemble still](docs/demos/assemble.png), [shimmer still](docs/demos/shimmer.png), or [recording instructions and capture details](docs/demos/README.md).
+
 ## Install a release
 
 Choose your platform target below. The [latest release](https://github.com/mamachanko/shimmer/releases/latest) provides an installable archive and its `.sha256` file for each target.

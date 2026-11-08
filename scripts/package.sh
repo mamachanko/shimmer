@@ -29,7 +29,7 @@ install -m 755 "$binary" "$staging/$name/shimmer"
 install -m 755 "$source_dir/scripts/install.sh" "$staging/$name/install.sh"
 install -m 644 "$source_dir/scripts/shell-glimmer.bash" "$source_dir/scripts/shell-glimmer.conf" "$staging/$name/scripts/"
 install -m 644 "$source_dir/README.md" "$source_dir/LICENSE" "$staging/$name/"
-install -m 644 "$source_dir/docs/shell-glimmer.md" "$staging/$name/docs/"
+cp -R "$source_dir/docs/." "$staging/$name/docs/"
 tar -czf "$output_dir/$archive" -C "$staging" "$name"
 (
     cd "$output_dir"
