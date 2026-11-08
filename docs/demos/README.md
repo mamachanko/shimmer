@@ -1,6 +1,6 @@
 # Record the terminal demos
 
-These GIFs record `shimmer 0.1.3` running through the committed Bash hook in an interactive Bash shell. The [manifest](manifest.json) records the binary's SHA-256 hash, hook hash, terminal geometry, font, frame counts, and timing.
+These GIFs record `shimmer 0.1.4` running through the committed Bash hook in an interactive Bash shell. The [manifest](manifest.json) records the binary's SHA-256 hash, hook hash, terminal geometry, font, frame counts, and timing.
 
 Use Bash 5.1 or newer, which Shimmer also needs at runtime. Recording additionally needs Python 3.10 or newer, Pillow, and tmux as development tools. Installed releases need neither Python nor Pillow. They work inside or outside tmux.
 
@@ -14,7 +14,7 @@ python3 -m venv .audit/demo-venv
 
 To record a downloaded release, replace `target/release/shimmer` with its executable path. Use `--output DIRECTORY` to save another recording. Use `--font PATH` and `--bold-font PATH` to select monospace TrueType fonts. The default font search supports DejaVu Sans Mono, Liberation Mono, and Menlo.
 
-The recorder creates an isolated home directory and tmux socket. It runs Bash without the user's profile or rc file, disables history writes, and sources `scripts/shell-glimmer.bash` with `SHELL_GLIMMER_BIN` pointing to the supplied executable. It removes the temporary terminal and home directory after each effect.
+The recorder creates an isolated home directory and tmux socket. It runs Bash without the user's profile or rc file, disables history writes, and sources `scripts/shell-shimmer.bash` with `SHELL_SHIMMER_BIN` pointing to the supplied executable. It removes the temporary terminal and home directory after each effect.
 
 The terminal has 96 columns and 28 rows. Its real, colored `PS1` uses the current username, a fixture host label of `terminal`, `~/shimmer`, and a prompt arrow. An existing `PROMPT_COMMAND` places that prompt at row 8. The recorder starts the effect by sourcing the hook in that shell. Assemble lands at the same prompt coordinates. The native binary restores the prior screen, then Bash displays the prompt.
 

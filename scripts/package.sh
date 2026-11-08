@@ -27,7 +27,7 @@ trap 'rm -rf "$staging"' EXIT HUP INT TERM
 mkdir -p "$staging/$name/scripts" "$staging/$name/docs"
 install -m 755 "$binary" "$staging/$name/shimmer"
 install -m 755 "$source_dir/scripts/install.sh" "$staging/$name/install.sh"
-install -m 644 "$source_dir/scripts/shell-glimmer.bash" "$source_dir/scripts/shell-glimmer.conf" "$staging/$name/scripts/"
+install -m 644 "$source_dir/scripts/shell-shimmer.bash" "$source_dir/scripts/shell-shimmer.conf" "$staging/$name/scripts/"
 install -m 644 "$source_dir/README.md" "$source_dir/LICENSE" "$staging/$name/"
 cp -R "$source_dir/docs/." "$staging/$name/docs/"
 tar -czf "$output_dir/$archive" -C "$staging" "$name"

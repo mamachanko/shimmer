@@ -43,9 +43,9 @@ tar -xzf shimmer-TARGET.tar.gz --strip-components=1 -C shimmer-install
 sh shimmer-install/install.sh
 ```
 
-The installer writes `~/.local/bin/shimmer` and `~/.config/shell/glimmer.bash`. It creates `~/.config/shell/glimmer.conf` only if that file does not exist. It places one guarded source line at the end of `~/.bashrc`, after existing prompt hooks. You can rerun the installer to update Shimmer.
+The installer writes `~/.local/bin/shimmer` and `~/.config/shell/shimmer.bash`. It creates `~/.config/shell/shimmer.conf` only if that file does not exist. It places one guarded source line at the end of `~/.bashrc`, after existing prompt hooks. You can rerun the installer to update Shimmer.
 
-Open a new interactive Bash shell. To change the animation, set `effect=assemble`, `effect=shimmer`, or `effect=off` in `~/.config/shell/glimmer.conf`. See [prompt configuration and terminal limits](docs/shell-glimmer.md) for previews and prompt behavior.
+Open a new interactive Bash shell. To change the animation, set `effect=assemble`, `effect=shimmer`, or `effect=off` in `~/.config/shell/shimmer.conf`. See [prompt configuration and terminal limits](docs/shell-shimmer.md) for previews and prompt behavior.
 
 ## Build from source
 

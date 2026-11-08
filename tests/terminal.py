@@ -14,7 +14,7 @@ import unicodedata
 import uuid
 
 BINARY = Path(sys.argv[1]).resolve()
-HOOK = Path(__file__).resolve().parents[1] / "scripts/shell-glimmer.bash"
+HOOK = Path(__file__).resolve().parents[1] / "scripts/shell-shimmer.bash"
 
 
 def cells(capture):
@@ -103,7 +103,7 @@ class Pane:
         state = self.home / "state"
         self.send("{ declare -p PROMPT_COMMAND; declare -F; } > " + shlex.quote(str(state)))
         self.wait(lambda: state.exists() and state.read_text())
-        assert "_glimmer" not in state.read_text(), state.read_text()
+        assert "_shimmer" not in state.read_text(), state.read_text()
         assert "declare -a PROMPT_COMMAND=" in state.read_text(), state.read_text()
 
 
@@ -128,7 +128,7 @@ def pane(prompt=r"PS1$ ", *, source=True, width=100, height=30, x=0, y=7, mode="
         instance = Pane("shimmer-test-" + uuid.uuid4().hex, home)
         instance.tmux("-f", "/dev/null", "new-session", "-d", "-s", "test", "-x", str(width), "-y", str(height),
                       "-e", "HOME=" + str(home), "-e", "TERM=tmux-256color",
-                      "-e", "SHELL_GLIMMER_BIN=" + str(binary), "-e", "SHELL_GLIMMER_EFFECT=" + effect,
+                      "-e", "SHELL_SHIMMER_BIN=" + str(binary), "-e", "SHELL_SHIMMER_EFFECT=" + effect,
                       "bash --noprofile --rcfile " + shlex.quote(str(rc)) + " -i")
         try:
             yield instance

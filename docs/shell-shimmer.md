@@ -1,4 +1,4 @@
-# Add a shell glimmer
+# Add a shell shimmer
 
 Show a short animation before the next interactive Bash prompt. Choose the cyan, lime, and white `shimmer` sweep or `assemble`, which flies colorful 3D prompt fragments into the prompt's native position. The previous terminal screen returns, then Bash prints the prompt once.
 
@@ -9,22 +9,22 @@ Use Bash 5.1 or newer and a terminal with ANSI colors and an alternate screen. T
 Install a [release bundle or source build](../README.md). From the repository root, `make install` builds the optimized binary and runs the installer. The installer preserves your effect configuration and installs these files:
 
 - `~/.local/bin/shimmer` is the renderer.
-- `~/.config/shell/glimmer.bash` is the Bash hook.
-- `~/.config/shell/glimmer.conf` selects the effect.
+- `~/.config/shell/shimmer.bash` is the Bash hook.
+- `~/.config/shell/shimmer.conf` selects the effect.
 
 The installer places this guarded source line once at the end of `~/.bashrc`, after all `PS1` and `PROMPT_COMMAND` setup, including prompt hooks such as direnv:
 
 ```bash
-[[ -r ~/.config/shell/glimmer.bash ]] && source ~/.config/shell/glimmer.bash
+[[ -r ~/.config/shell/shimmer.bash ]] && source ~/.config/shell/shimmer.bash
 ```
 
-Keep that line after any prompt hooks you add later. The hook runs the binary directly and never compiles code at shell startup. For development, set `SHELL_GLIMMER_BIN` to the full path of a different `shimmer` executable.
+Keep that line after any prompt hooks you add later. The hook runs the binary directly and never compiles code at shell startup. For development, set `SHELL_SHIMMER_BIN` to the full path of a different `shimmer` executable.
 
 Open a new interactive Bash shell to see the animation. The script skips noninteractive shells, redirected terminals, and `TERM=dumb`.
 
 ## Select an effect
 
-Set one value in `~/.config/shell/glimmer.conf`:
+Set one value in `~/.config/shell/shimmer.conf`:
 
 ```ini
 effect=assemble
@@ -39,16 +39,16 @@ The configuration is data and is never sourced. Spaces around `effect`, `=`, and
 In an interactive Bash terminal, run either command:
 
 ```bash
-SHELL_GLIMMER_EFFECT=assemble source ~/.config/shell/glimmer.bash
-SHELL_GLIMMER_EFFECT=shimmer source ~/.config/shell/glimmer.bash
+SHELL_SHIMMER_EFFECT=assemble source ~/.config/shell/shimmer.bash
+SHELL_SHIMMER_EFFECT=shimmer source ~/.config/shell/shimmer.bash
 ```
 
-The effect runs at the next prompt, after existing prompt hooks. The temporary selector is captured when you source the script. A valid `SHELL_GLIMMER_EFFECT` overrides the configuration. An invalid value leaves the configured effect selected.
+The effect runs at the next prompt, after existing prompt hooks. The temporary selector is captured when you source the script. A valid `SHELL_SHIMMER_EFFECT` overrides the configuration. An invalid value leaves the configured effect selected.
 
 Sourcing again before that prompt replaces the pending effect. Selecting `off` cancels it. To disable animations unconditionally, set this before the source line in `~/.bashrc`:
 
 ```bash
-export SHELL_GLIMMER=0
+export SHELL_SHIMMER=0
 ```
 
 This setting overrides both selectors and skips prompt expansion. Remove it to enable the selected effect again.

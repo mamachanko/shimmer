@@ -79,8 +79,8 @@ def record(binary, hook, effect):
             "cd ~/shimmer\n"
             "printf '\\033[2J\\033[H'\n"
             "printf 'Bash %s\\n' \"${BASH_VERSION%%(*}\"\n"
-            "\"$SHELL_GLIMMER_BIN\" --version\n"
-            "printf '\\nChoose an effect in ~/.config/shell/glimmer.conf\\n'\n"
+            "\"$SHELL_SHIMMER_BIN\" --version\n"
+            "printf '\\nChoose an effect in ~/.config/shell/shimmer.conf\\n'\n"
             "PROMPT_COMMAND='printf \"\\033[8;1H\\033[K\"'\n"
         )
         pane = Pane(home / "tmux.sock")
@@ -89,8 +89,8 @@ def record(binary, hook, effect):
                 "-f", "/dev/null", "new-session", "-d", "-s", "demo",
                 "-x", str(WIDTH), "-y", str(HEIGHT),
                 "-e", "HOME=" + str(home), "-e", "TERM=tmux-256color",
-                "-e", "SHELL_GLIMMER_BIN=" + str(binary),
-                "-e", "SHELL_GLIMMER_EFFECT=" + effect,
+                "-e", "SHELL_SHIMMER_BIN=" + str(binary),
+                "-e", "SHELL_SHIMMER_EFFECT=" + effect,
                 "-e", "DEMO_HOOK=" + str(hook),
                 "bash --noprofile --rcfile " + shlex.quote(str(rc)) + " -i",
             )
@@ -255,7 +255,7 @@ def main():
     font = ImageFont.truetype(str(regular), 15)
     bold_font = ImageFont.truetype(str(bold), 15)
     args.output.mkdir(parents=True, exist_ok=True)
-    hook = Path(__file__).resolve().parent / "shell-glimmer.bash"
+    hook = Path(__file__).resolve().parent / "shell-shimmer.bash"
     manifest = {
         "binary_version": subprocess.check_output([str(binary), "--version"], text=True).strip(),
         "binary_sha256": hashlib.sha256(binary.read_bytes()).hexdigest(),
